@@ -1,13 +1,4 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
-
-  /* estrelas simples */
-  background-image:
-    radial-gradient(white 1px, transparent 1px),
-    radial-gradient(white 1px, transparent 1px);
-
-  background-size: 50px 50px;
-  background-position: 0 0, 25px 25px;
 }

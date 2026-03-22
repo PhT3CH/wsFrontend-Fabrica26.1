@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Card from "./components/Card";
 
 export default function Home() {
-
   const [dados, setDados] = useState([]);
   const [texto, setTexto] = useState("");
   const [pagina, setPagina] = useState(1);
@@ -24,7 +23,6 @@ export default function Home() {
     let lista = [];
 
     for (let i = 0; i < dados.length; i++) {
-
       let nome = dados[i].name.toLowerCase();
       let busca = texto.toLowerCase();
 
@@ -45,10 +43,8 @@ export default function Home() {
         backgroundPosition: "center"
       }}
     >
-
       <Header texto={texto} setTexto={setTexto} />
 
-      {/* 👇 CORREÇÃO DO ERRO AQUI */}
       <div
         style={{
           paddingTop: "120px",
@@ -57,8 +53,6 @@ export default function Home() {
           paddingBottom: "20px"
         }}
       >
-
-        {/* PERSONAGENS */}
         <div
           style={{
             display: "flex",
@@ -71,19 +65,65 @@ export default function Home() {
           })}
         </div>
 
-        {/* PAGINAÇÃO */}
         <div style={{ marginTop: "30px", textAlign: "center" }}>
+          <button
+            onClick={function () { setPagina(1); }}
+            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
+            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
+            style={botao}
+          >
+            1
+          </button>
 
-          <button onClick={function () { setPagina(1); }}>1</button>
-          <button onClick={function () { setPagina(2); }}>2</button>
-          <button onClick={function () { setPagina(3); }}>3</button>
-          <button onClick={function () { setPagina(4); }}>4</button>
-          <button onClick={function () { setPagina(5); }}>5</button>
+          <button
+            onClick={function () { setPagina(2); }}
+            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
+            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
+            style={botao}
+          >
+            2
+          </button>
 
+          <button
+            onClick={function () { setPagina(3); }}
+            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
+            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
+            style={botao}
+          >
+            3
+          </button>
+
+          <button
+            onClick={function () { setPagina(4); }}
+            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
+            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
+            style={botao}
+          >
+            4
+          </button>
+
+          <button
+            onClick={function () { setPagina(5); }}
+            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
+            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
+            style={botao}
+          >
+            5
+          </button>
         </div>
-
       </div>
-
     </div>
   );
 }
+
+const botao = {
+  margin: "0 6px",
+  padding: "8px 14px",
+  backgroundColor: "#22c55e",
+  color: "black",
+  border: "none",
+  borderRadius: "8px",
+  cursor: "pointer",
+  fontWeight: "bold",
+  transition: "0.2s"
+};
