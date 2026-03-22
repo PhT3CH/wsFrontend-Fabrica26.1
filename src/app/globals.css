@@ -1,30 +1,13 @@
-/* SEM BORDAAA */
 body {
   margin: 0;
   padding: 0;
-  background-color: #0f172a;
-}
+  background-color: black;
 
-.cabecalho-principal {
-  background-color: #22c55e;
-  color: white;
-  padding: 20px 0;
-}
+  /* estrelas simples */
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px);
 
-
-.conteudo-header {
-  max-width: 1000px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-.link-menu {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
-.link-menu:hover {
-  text-decoration: underline;
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
 }

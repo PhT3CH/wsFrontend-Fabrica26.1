@@ -1,64 +1,89 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Card from "./components/Card";
 
 export default function Home() {
+
   const [dados, setDados] = useState([]);
   const [texto, setTexto] = useState("");
   const [pagina, setPagina] = useState(1);
 
-  useEffect(() => {
-    carregar();
+  useEffect(function () {
+    pegar();
   }, [pagina]);
 
-  async function carregar() {
-    let resposta = await fetch(`https://rickandmortyapi.com/api/character?page=${pagina}`);
-    let resultado = await resposta.json();
-    setDados(resultado.results || []);
+  async function pegar() {
+    let res = await fetch("https://rickandmortyapi.com/api/character?page=" + pagina);
+    let info = await res.json();
+    setDados(info.results);
   }
 
-  function filtrar() {
-    return dados.filter(function (item) {
-      return item.name.toLowerCase().includes(texto.toLowerCase());
-    });
+  function mostrar() {
+    let lista = [];
+
+    for (let i = 0; i < dados.length; i++) {
+
+      let nome = dados[i].name.toLowerCase();
+      let busca = texto.toLowerCase();
+
+      if (nome.includes(busca)) {
+        lista.push(dados[i]);
+      }
+    }
+
+    return lista;
   }
 
   return (
-    <div style={{ backgroundColor: "#0f172a", minHeight: "100vh" }}>
-      <Header />
+    <div
+      style={{
+        backgroundImage: "url('/fundo.png')",
+        minHeight: "100vh",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      }}
+    >
 
-      <div style={{ padding: "20px" }}>
-        <h2 style={{ color: "#00ffcc" }}>Lista de personagens</h2>
+      <Header texto={texto} setTexto={setTexto} />
 
-        <input
-          type="text"
-          placeholder="Digite um nome"
-          value={texto}
-          onChange={(e) => setTexto(e.target.value)}
-          style={{ padding: "5px", marginBottom: "20px" }}
-        />
+      {/* 👇 CORREÇÃO DO ERRO AQUI */}
+      <div
+        style={{
+          paddingTop: "120px",
+          paddingLeft: "20px",
+          paddingRight: "20px",
+          paddingBottom: "20px"
+        }}
+      >
 
-        
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {filtrar().map(function (item) {
+        {/* PERSONAGENS */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center"
+          }}
+        >
+          {mostrar().map(function (item) {
             return <Card key={item.id} character={item} />;
           })}
         </div>
 
-        
-        <div style={{ marginTop: "20px" }}>
-          <button onClick={() => setPagina(1)}>1</button>
-          <button onClick={() => setPagina(2)}>2</button>
-          <button onClick={() => setPagina(3)}>3</button>
-          <button onClick={() => setPagina(4)}>4</button>
-          <button onClick={() => setPagina(5)}>5</button>
+        {/* PAGINAÇÃO */}
+        <div style={{ marginTop: "30px", textAlign: "center" }}>
+
+          <button onClick={function () { setPagina(1); }}>1</button>
+          <button onClick={function () { setPagina(2); }}>2</button>
+          <button onClick={function () { setPagina(3); }}>3</button>
+          <button onClick={function () { setPagina(4); }}>4</button>
+          <button onClick={function () { setPagina(5); }}>5</button>
+
         </div>
+
       </div>
 
-      <Footer />
     </div>
   );
 }

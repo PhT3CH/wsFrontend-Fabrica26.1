@@ -1,13 +1,14 @@
 export default function Footer() {
   return (
-    <div style={{
-      backgroundColor: "#020617",
-      color: "#00ffcc",
-      padding: "10px",
-      marginTop: "20px",
-      textAlign: "center"
-    }}>
-      <p>Projeto da disciplina de Front-end</p>
+    <div
+      style={{
+        textAlign: "center",
+        color: "white",
+        padding: "20px",
+        backgroundColor: "#1e2a3d"
+      }}
+    >
+      <p>Feito por mim</p>
     </div>
   );
 }
