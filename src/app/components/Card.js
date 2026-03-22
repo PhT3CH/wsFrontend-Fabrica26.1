@@ -10,26 +10,14 @@ export default function Card(props) {
   let p = props.character;
 
   function status(s) {
-    if (s == "Alive") {
-      return "Vivo";
-    }
-
-    if (s == "Dead") {
-      return "Morto";
-    }
-
+    if (s == "Alive") return "Vivo";
+    if (s == "Dead") return "Morto";
     return "Desconhecido";
   }
 
   function especie(e) {
-    if (e == "Human") {
-      return "Humano";
-    }
-
-    if (e == "Alien") {
-      return "Alienígena";
-    }
-
+    if (e == "Human") return "Humano";
+    if (e == "Alien") return "Alienígena";
     return e;
   }
 
@@ -45,27 +33,35 @@ export default function Card(props) {
         setHover(false);
       }}
       style={{
-        backgroundColor: hover ? "#1f2937" : "#111",
+        backgroundColor: hover ? "white" : "#111",
         borderRadius: "10px",
-        margin: "10px",
         padding: "10px",
-        width: "18%",
-        color: "white",
+        color: hover ? "black" : "white",
         cursor: "pointer",
         textAlign: "center",
-        transform: hover ? "scale(1.05)" : "scale(1)",
-        transition: "0.2s"
+        transform: hover ? "scale(1.03)" : "scale(1)",
+        transition: "0.2s",
+        boxSizing: "border-box",
+        width: "100%",
+        maxWidth: "220px",
+        margin: "0 auto"
       }}
     >
       <img
         src={p.image}
-        width="150"
-        style={{ borderRadius: "10px" }}
+        alt={p.name}
+        style={{
+          width: "100%",
+          borderRadius: "10px",
+          display: "block"
+        }}
       />
 
-      <h3 style={{ marginTop: "10px" }}>{p.name}</h3>
+      <h3 style={{ marginTop: "10px", fontSize: "18px" }}>
+        {p.name}
+      </h3>
 
-      <p style={{ fontSize: "14px" }}>
+      <p style={{ fontSize: "14px", marginBottom: "0" }}>
         {status(p.status)} • {especie(p.species)}
       </p>
     </div>

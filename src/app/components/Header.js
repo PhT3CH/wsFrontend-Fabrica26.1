@@ -9,14 +9,15 @@ export default function Header(props) {
         zIndex: "1000",
         display: "flex",
         alignItems: "center",
-        padding: "10px 20px",
+        gap: "10px",
+        padding: "10px 15px",
         backgroundColor: "rgba(0, 0, 0, 0.6)",
-        backdropFilter: "blur(10px)"
+        backdropFilter: "blur(10px)",
+        boxSizing: "border-box",
+        flexWrap: "wrap"
       }}
     >
-      <div style={{ marginRight: "20px" }}>
-        <img src="/logo.png" width="150" />
-      </div>
+      <img src="/logo.png" width="140" />
 
       <input
         type="text"
@@ -26,7 +27,9 @@ export default function Header(props) {
           props.setTexto(e.target.value);
         }}
         style={{
-          width: "400px",
+          flex: "1",
+          minWidth: "220px",
+          maxWidth: "500px",
           padding: "10px",
           borderRadius: "20px",
           border: "1px solid gray",

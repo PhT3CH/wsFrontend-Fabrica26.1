@@ -11,27 +11,25 @@ export default function Home() {
 
   useEffect(function () {
     pegar();
-  }, [pagina]);
+  }, [pagina, texto]);
 
   async function pegar() {
-    let res = await fetch("https://rickandmortyapi.com/api/character?page=" + pagina);
-    let info = await res.json();
-    setDados(info.results);
-  }
+    let url = "";
 
-  function mostrar() {
-    let lista = [];
-
-    for (let i = 0; i < dados.length; i++) {
-      let nome = dados[i].name.toLowerCase();
-      let busca = texto.toLowerCase();
-
-      if (nome.includes(busca)) {
-        lista.push(dados[i]);
-      }
+    if (texto == "") {
+      url = "https://rickandmortyapi.com/api/character?page=" + pagina;
+    } else {
+      url = "https://rickandmortyapi.com/api/character/?name=" + texto;
     }
 
-    return lista;
+    let res = await fetch(url);
+    let info = await res.json();
+
+    if (info.results) {
+      setDados(info.results);
+    } else {
+      setDados([]);
+    }
   }
 
   return (
@@ -47,83 +45,44 @@ export default function Home() {
 
       <div
         style={{
-          paddingTop: "120px",
-          paddingLeft: "20px",
-          paddingRight: "20px",
+          paddingTop: "110px",
+          paddingLeft: "10px",
+          paddingRight: "10px",
           paddingBottom: "20px"
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center"
-          }}
-        >
-          {mostrar().map(function (item) {
+        <div className="lista-personagens">
+          {dados.map(function (item) {
             return <Card key={item.id} character={item} />;
           })}
         </div>
 
-        <div style={{ marginTop: "30px", textAlign: "center" }}>
-          <button
-            onClick={function () { setPagina(1); }}
-            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
-            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
-            style={botao}
-          >
-            1
-          </button>
+        {dados.length == 0 && (
+          <h2 style={{ color: "white", textAlign: "center" }}>
+            Nenhum personagem encontrado
+          </h2>
+        )}
 
-          <button
-            onClick={function () { setPagina(2); }}
-            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
-            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
-            style={botao}
-          >
-            2
-          </button>
-
-          <button
-            onClick={function () { setPagina(3); }}
-            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
-            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
-            style={botao}
-          >
-            3
-          </button>
-
-          <button
-            onClick={function () { setPagina(4); }}
-            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
-            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
-            style={botao}
-          >
-            4
-          </button>
-
-          <button
-            onClick={function () { setPagina(5); }}
-            onMouseEnter={function (e) { e.target.style.backgroundColor = "#16a34a"; }}
-            onMouseLeave={function (e) { e.target.style.backgroundColor = "#22c55e"; }}
-            style={botao}
-          >
-            5
-          </button>
-        </div>
+        {texto == "" && (
+          <div style={{ marginTop: "30px", textAlign: "center" }}>
+            <button onClick={function () { setPagina(1); }} style={botao}>1</button>
+            <button onClick={function () { setPagina(2); }} style={botao}>2</button>
+            <button onClick={function () { setPagina(3); }} style={botao}>3</button>
+            <button onClick={function () { setPagina(4); }} style={botao}>4</button>
+            <button onClick={function () { setPagina(5); }} style={botao}>5</button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 const botao = {
-  margin: "0 6px",
+  margin: "4px",
   padding: "8px 14px",
   backgroundColor: "#22c55e",
   color: "black",
   border: "none",
   borderRadius: "8px",
-  cursor: "pointer",
-  fontWeight: "bold",
-  transition: "0.2s"
+  cursor: "pointer"
 };

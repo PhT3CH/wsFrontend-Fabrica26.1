@@ -2,3 +2,22 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.lista-personagens {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .lista-personagens {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .lista-personagens {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
