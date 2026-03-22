@@ -8,7 +8,7 @@ export default function Footer() {
         backgroundColor: "#1e2a3d"
       }}
     >
-      <p>Feito por mim</p>
+      <p>FÁBRICA</p>
     </div>
   );
 }
