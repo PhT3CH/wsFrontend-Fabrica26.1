@@ -72,6 +72,19 @@ export default function Home() {
             <button onClick={function () { setPagina(5); }} style={botao}>5</button>
           </div>
         )}
+
+        <div
+          style={{
+            textAlign: "center",
+            color: "white",
+            fontSize: "12px",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            padding: "8px",
+            marginTop: "30px"
+          }}
+        >
+          © 2026 Pablo Freire | Todos os direitos reservados
+        </div>
       </div>
     </div>
   );
